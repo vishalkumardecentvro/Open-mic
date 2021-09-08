@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "497517024994",
+    "project_id": "open-mic-database",
+    "storage_bucket": "open-mic-database.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:497517024994:android:9f206e09a4bf1e6f52f0bb",
+        "android_client_info": {
+          "package_name": "com.myapp.openmic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "497517024994-le7fqtjqesqbscg73uo7kg5ibh6kea0a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPNC8Wodd1LwmLb0jnHXoAnuVDJjb8XPY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "497517024994-le7fqtjqesqbscg73uo7kg5ibh6kea0a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

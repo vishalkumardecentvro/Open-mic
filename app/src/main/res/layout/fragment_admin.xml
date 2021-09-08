@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:padding="5dp"
+  tools:context=".fragments.admin.AdminFragment">
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/tilEventName"
+      style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="10dp"
+      android:hint="Event name *"
+      app:errorEnabled="true"
+      app:helperText="* Required"
+      app:helperTextEnabled="true"
+      app:startIconDrawable="@drawable/ic_event">
+
+      <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/tilLocation"
+      style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="10dp"
+      android:hint="location *"
+      app:errorEnabled="true"
+      app:helperText="* Required"
+      app:helperTextEnabled="true"
+      app:startIconDrawable="@drawable/ic_location">
+
+      <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.chip.ChipGroup
+      android:id="@+id/cgAgeChipGroup"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="5dp" />
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal">
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilAge"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="1"
+        android:hint="Age criterion"
+        app:startIconDrawable="@drawable/ic_child">
+
+        <com.google.android.material.textfield.TextInputEditText
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content" />
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <ImageView
+        android:id="@+id/ivAddAge"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:src="@drawable/ic_add"
+        app:tint="@color/success" />
+
+    </LinearLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/tilShortDescription"
+      style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="10dp"
+      android:hint="Short description *"
+      app:errorEnabled="true"
+      app:helperText="* Required"
+      app:helperTextEnabled="true"
+      app:startIconDrawable="@drawable/ic_description">
+
+      <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:lines="2" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/tilLongDescription"
+      style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="10dp"
+      android:hint="Long description"
+      app:startIconDrawable="@drawable/ic_description">
+
+      <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:lines="5" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.chip.ChipGroup
+      android:id="@+id/cgHostedByChipGroup"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="5dp" />
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal">
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilHostedBy"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="1"
+        android:hint="Hosted by"
+        app:startIconDrawable="@drawable/ic_hosted_by">
+
+        <com.google.android.material.textfield.TextInputEditText
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content" />
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <ImageView
+        android:id="@+id/ivAddHost"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:src="@drawable/ic_add"
+        app:tint="@color/success" />
+
+    </LinearLayout>
+
+    <com.google.android.material.chip.ChipGroup
+      android:id="@+id/cgPerformedByChipGroup"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="5dp" />
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal">
+
+      <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilPerformedBy"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="1"
+        android:hint="Performed by"
+        app:startIconDrawable="@drawable/ic_performer">
+
+        <com.google.android.material.textfield.TextInputEditText
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content" />
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <ImageView
+        android:id="@+id/ivAddPerformers"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:src="@drawable/ic_add"
+        app:tint="@color/success" />
+
+    </LinearLayout>
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginBottom="10dp"
+      android:orientation="horizontal">
+
+      <com.google.android.material.card.MaterialCardView
+        android:id="@+id/mcvDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        style="@style/default_card_style"
+        android:layout_weight="1">
+
+        <TextView
+          android:id="@+id/tvDate"
+          style="@style/default_text_view_style"
+          android:layout_width="match_parent"
+          android:layout_height="50dp"
+          android:hint="Date"
+          android:inputType="none"
+          android:padding="10dp" />
+
+      </com.google.android.material.card.MaterialCardView>
+
+      <com.google.android.material.card.MaterialCardView
+        android:id="@+id/mcvTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/default_card_style"
+        android:layout_margin="5dp"
+        android:layout_weight="1">
+
+        <TextView
+          android:id="@+id/tvTime"
+          style="@style/default_text_view_style"
+          android:layout_width="match_parent"
+          android:layout_height="50dp"
+          android:hint="Time"
+          android:inputType="none"
+          android:padding="10dp" />
+
+      </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="10dp"
+      android:orientation="horizontal">
+
+      <Button
+        android:id="@+id/cancelButton"
+        style="@style/default_text_view_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:text="Cancel"
+        android:textColor="@color/white" />
+
+      <Button
+        android:id="@+id/saveButton"
+        style="@style/default_text_view_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:text="Save"
+        android:textColor="@color/white" />
+    </LinearLayout>
+
+  </LinearLayout>
+
+</ScrollView>
