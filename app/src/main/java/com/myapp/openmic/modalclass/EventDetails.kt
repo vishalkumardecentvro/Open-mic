@@ -9,6 +9,7 @@ data class EventDetails (
   var date : String,
   val ageCriteria : String,
   val hostedBy : ArrayList<String>,
-  val performedBy : ArrayList<String>
+  val performedBy : ArrayList<String>,
+  val eventImageUrl : String
   )
 {}

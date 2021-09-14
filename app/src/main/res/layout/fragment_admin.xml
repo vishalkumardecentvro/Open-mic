@@ -12,6 +12,21 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+    <Button
+      android:id="@+id/imageButton"
+      android:layout_width="wrap_content"
+      android:layout_height="50dp"
+      android:layout_gravity="center_horizontal"
+      android:layout_marginBottom="10dp"
+      android:text="Select image from gallery" />
+
+    <ImageView
+      android:id="@+id/ivEvent"
+      android:layout_width="match_parent"
+      android:layout_height="250dp"
+      android:layout_marginBottom="10dp"
+      android:visibility="gone" />
+
     <com.google.android.material.textfield.TextInputLayout
       android:id="@+id/tilEventName"
       style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -200,10 +215,10 @@
 
       <com.google.android.material.card.MaterialCardView
         android:id="@+id/mcvDate"
+        style="@style/default_card_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        style="@style/default_card_style"
         android:layout_weight="1">
 
         <TextView
@@ -219,9 +234,9 @@
 
       <com.google.android.material.card.MaterialCardView
         android:id="@+id/mcvTime"
+        style="@style/default_card_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/default_card_style"
         android:layout_margin="5dp"
         android:layout_weight="1">
 
