@@ -9,7 +9,6 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +16,6 @@ import android.widget.TimePicker
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
-import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.material.chip.Chip
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.firestore.FirebaseFirestore
@@ -28,7 +26,6 @@ import com.google.firebase.storage.StorageReference
 import com.myapp.openmic.R
 import com.myapp.openmic.Utils
 import com.myapp.openmic.databinding.FragmentAdminBinding
-import com.myapp.openmic.modalclass.EventDetails
 import java.io.InputStream
 import java.util.*
 import kotlin.collections.ArrayList
@@ -216,14 +213,12 @@ class AdminFragment : Fragment() {
     val hour = calendar.get(Calendar.HOUR)
     val min = calendar.get(Calendar.MINUTE)
 
-    val timePicker =
-      TimePickerDialog(requireContext(), object : TimePickerDialog.OnTimeSetListener {
-        override fun onTimeSet(p0: TimePicker?, hour: Int, min: Int) {
-          binding.tvTime.setText("$hour : $min")
+    TimePickerDialog(requireContext(), object : TimePickerDialog.OnTimeSetListener {
+      override fun onTimeSet(p0: TimePicker?, hour: Int, min: Int) {
+        binding.tvTime.text = "$hour : $min"
 
-        }
-      }, hour, min, false).show()
-
+      }
+    }, hour, min, false).show()
   }
 
   private fun openDatePicker() {
@@ -232,44 +227,30 @@ class AdminFragment : Fragment() {
     val month = calendar.get(Calendar.MONTH)
     val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-    val datePicker = DatePickerDialog(requireContext(), { view, year, month, day ->
-      binding.tvDate.setText("$day/$month/$year")
+    DatePickerDialog(requireContext(), { view, year, month, day ->
+      binding.tvDate.text = "$day/$month/$year"
 
     }, year, month, day).show()
-
   }
 
   private fun saveEvent() {
-    val eventObject = EventDetails(
-      binding.tilEventName.editText?.text.toString(),
-      binding.tilLocation.editText?.text.toString(),
-      binding.tilLongDescription.editText?.text.toString(),
-      binding.tilShortDescription.editText?.text.toString(),
-      binding.tvTime.text.toString(),
-      binding.tvDate.text.toString(),
-      "18+",
-      hostList,
-      performerList,
-      ""
-    )
-
     val event = hashMapOf<String, Any>()
-    //event.put("object", eventObject)
+
     event.put("eventName", binding.tilEventName.editText?.text.toString())
-    event.put("eventLocation", binding.tilLocation.editText?.text.toString(),)
-    event.put("longDescription", binding.tilLongDescription.editText?.text.toString(),)
+    event.put("type", binding.tilEventType.editText?.text.toString())
+    event.put("eventLocation", binding.tilLocation.editText?.text.toString())
+    event.put("longDescription", binding.tilLongDescription.editText?.text.toString())
     event.put("shortDescription", binding.tilShortDescription.editText?.text.toString())
     event.put("time", binding.tvTime.text.toString())
     event.put("date", binding.tvDate.text.toString())
-    event.put("ageCriteria","18+")
+    event.put("ageCriteria", "18+")
 
     event.put("hostedBy", hostList)
     event.put("performedBy", performerList)
 
-    firestore.collection("events/Roy78jWH1ql2tnZ0galR/comedyEvents").add(event)
+    firestore.collection("events").add(event)
       .addOnSuccessListener {
         Toast.makeText(context, "Event saved", Toast.LENGTH_SHORT).show()
-
         saveEventImage(it.id)
       }
 
@@ -302,7 +283,6 @@ class AdminFragment : Fragment() {
       binding.ivEvent.setImageBitmap(bitmap)
       binding.ivEvent.visibility = View.VISIBLE
     }
-
   }
 
   private fun saveEventImage(id: String) {
@@ -311,25 +291,27 @@ class AdminFragment : Fragment() {
       .addOnSuccessListener {
         Toast.makeText(context, "Media uploaded", Toast.LENGTH_SHORT).show()
 
-        imageRef.downloadUrl.addOnSuccessListener(OnSuccessListener<Uri?> {
-          Log.i("--url--", it.toString())
+        imageRef.downloadUrl.addOnSuccessListener {
           updateEventDocumentWithImage(id, it.toString())
-        })
+        }
 
       }.addOnFailureListener {
         Toast.makeText(context, "Failed to upload media", Toast.LENGTH_SHORT).show()
-        Log.e("--media error--", it.stackTraceToString())
       }
   }
 
   private fun updateEventDocumentWithImage(id: String, imageUrl: String) {
     val eventImageHash = HashMap<String, Any>()
     eventImageHash.put("eventImageUrl", imageUrl)
-    firestore.collection("events/Roy78jWH1ql2tnZ0galR/comedyEvents").document(id)
+
+    firestore.collection("events").document(id)
       .update(eventImageHash)
+
       .addOnSuccessListener {
-        Toast.makeText(context, "Updated", Toast.LENGTH_SHORT).show()
+
+        Toast.makeText(context, "Image url updated", Toast.LENGTH_SHORT).show()
       }.addOnFailureListener {
+
         Toast.makeText(context, "Failed to update", Toast.LENGTH_SHORT).show()
       }
   }
