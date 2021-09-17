@@ -1,6 +1,6 @@
 package com.myapp.openmic.modalclass
 
-data class EventDetails(
+data class Event(
   val eventName: String,
   val type : String,
   val eventLocation: String,

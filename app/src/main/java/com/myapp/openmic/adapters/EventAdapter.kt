@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.myapp.openmic.databinding.EventCardBinding
-import com.myapp.openmic.modalclass.EventDetails
+import com.myapp.openmic.modalclass.Event
 import com.squareup.picasso.Picasso
 
 class EventAdapter : RecyclerView.Adapter<EventAdapter.ViewHolder>() {
-  private var eventList : ArrayList<EventDetails> = ArrayList()
+  private var eventList : ArrayList<Event> = ArrayList()
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
     val view = EventCardBinding.inflate(LayoutInflater.from(parent.context),parent,false)
@@ -31,14 +31,14 @@ class EventAdapter : RecyclerView.Adapter<EventAdapter.ViewHolder>() {
 
     }
 
-    fun populate(position: Int, eventList: ArrayList<EventDetails>) {
+    fun populate(position: Int, eventList: ArrayList<Event>) {
       binding.tvEventDescription.text = eventList.get(position).shortDescription
       Picasso.get().load(eventList.get(position).eventImageUrl).fit().into(binding.ivEventImage)
     }
 
   }
 
-  fun setEventList(event : ArrayList<EventDetails>){
+  fun setEventList(event : ArrayList<Event>){
     this.eventList = event
     notifyDataSetChanged()
   }

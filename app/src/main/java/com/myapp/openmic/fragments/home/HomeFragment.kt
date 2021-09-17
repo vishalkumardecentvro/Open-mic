@@ -12,19 +12,18 @@ import com.google.firebase.firestore.ktx.toObject
 import com.myapp.openmic.adapters.EventAdapter
 import com.myapp.openmic.adapters.EventTypesAdapter
 import com.myapp.openmic.databinding.FragmentHomeBinding
-import com.myapp.openmic.modalclass.EventDetails
+import com.myapp.openmic.modalclass.Event
 import com.myapp.openmic.modalclass.EventTypes
-import kotlinx.coroutines.*
 
 class HomeFragment : Fragment() {
   private var _binding: FragmentHomeBinding? = null
   private val binding get() = _binding!!
   private lateinit var firestore: FirebaseFirestore
   private var eventTypesList: ArrayList<EventTypes>? = null;
-  private var comedyEvents: ArrayList<EventDetails>? = null;
+  private var allEventList: ArrayList<Event>? = null;
   private var eventTypesAdapter: EventTypesAdapter? = null;
   private var eventAdapter: EventAdapter? = null
-  private var allEvents: ArrayList<EventTypes>? = null;
+
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -50,7 +49,7 @@ class HomeFragment : Fragment() {
     firestore = FirebaseFirestore.getInstance()
 
     eventTypesList = arrayListOf()
-    comedyEvents = arrayListOf()
+    allEventList = arrayListOf()
 
     eventTypesAdapter = EventTypesAdapter()
     eventAdapter = EventAdapter()
@@ -74,39 +73,46 @@ class HomeFragment : Fragment() {
 
           it.forEach {
             val eventTypes: EventTypes = it.toObject()
-            eventTypesList?.add(eventTypes)
+
+            firestore.collection("events").whereEqualTo("type", eventTypes.name).get()
+              .addOnSuccessListener {
+
+                it.forEach {
+
+                  val event: Event = it.toObject()
+                  allEventList!!.add(event)
+
+                }
+
+                eventTypes.eventList = allEventList!!
+                eventTypesList?.add(eventTypes)
+                updateUi()
+
+                allEventList = ArrayList()
+
+              }.addOnFailureListener {
+                Toast.makeText(
+                  context,
+                  "Please check your internet connection!",
+                  Toast.LENGTH_SHORT
+                )
+                  .show()
+              }
           }
         }
 
-        firestore.collection("events").get()
-          .addOnSuccessListener {
-
-            it.forEach {
-
-              val eventDetails: EventDetails = it.toObject()
-              comedyEvents!!.add(eventDetails)
-            }
-
-            updateUi()
-
-          }.addOnFailureListener {
-            Log.e("--error--", it.printStackTrace().toString())
-          }
-
       }.addOnFailureListener {
 
-        Toast.makeText(context, "Please check your internet connection", Toast.LENGTH_SHORT)
+        Toast.makeText(context, "Please check your internet connection!", Toast.LENGTH_SHORT)
           .show()
       }
   }
 
   private fun updateUi() {
-    for (event in eventTypesList!!) {
-      event.comedyEventList = comedyEvents!!
 
-    }
     eventTypesAdapter?.setEventTypeList(eventTypesList!!)
     Log.i("--etSize--", eventTypesList!!.size.toString())
+
   }
 
 }

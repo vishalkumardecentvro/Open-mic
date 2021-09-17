@@ -37,7 +37,7 @@ class EventTypesAdapter : RecyclerView.Adapter<EventTypesAdapter.ViewHolder>() {
       binding.tvEventType.text = eventTypeList.get(position).name
 
       val eventAdapter = EventAdapter()
-      eventAdapter.setEventList(eventTypeList.get(position).comedyEventList)
+      eventAdapter.setEventList(eventTypeList.get(position).eventList)
       binding.rvEvents.adapter = eventAdapter
 
     }
