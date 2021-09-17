@@ -5,20 +5,26 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
-import com.myapp.openmic.adapters.EventsAdapter
+import com.myapp.openmic.adapters.EventAdapter
+import com.myapp.openmic.adapters.EventTypesAdapter
 import com.myapp.openmic.databinding.FragmentHomeBinding
 import com.myapp.openmic.modalclass.EventDetails
 import com.myapp.openmic.modalclass.EventTypes
+import kotlinx.coroutines.*
 
 class HomeFragment : Fragment() {
   private var _binding: FragmentHomeBinding? = null
   private val binding get() = _binding!!
   private lateinit var firestore: FirebaseFirestore
   private var eventTypesList: ArrayList<EventTypes>? = null;
-  private var eventsAdapter : EventsAdapter ? = null;
+  private var comedyEvents: ArrayList<EventDetails>? = null;
+  private var eventTypesAdapter: EventTypesAdapter? = null;
+  private var eventAdapter: EventAdapter? = null
+  private var allEvents: ArrayList<EventTypes>? = null;
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -34,18 +40,25 @@ class HomeFragment : Fragment() {
     instantiate()
     initialize()
     listen()
+
     load()
+
+
   }
 
   private fun instantiate() {
-    firestore = FirebaseFirestore.getInstance();
+    firestore = FirebaseFirestore.getInstance()
+
     eventTypesList = arrayListOf()
-    eventsAdapter = EventsAdapter()
+    comedyEvents = arrayListOf()
+
+    eventTypesAdapter = EventTypesAdapter()
+    eventAdapter = EventAdapter()
 
   }
 
   private fun initialize() {
-    binding.rvEvent.adapter = eventsAdapter
+    binding.rvEvent.adapter = eventTypesAdapter
   }
 
   private fun listen() {
@@ -56,37 +69,44 @@ class HomeFragment : Fragment() {
 
     firestore.collection("event-types").get()
       .addOnSuccessListener { it ->
-        Log.i("--size--", it.size().toString())
+
         if (!it.isEmpty) {
+
           it.forEach {
             val eventTypes: EventTypes = it.toObject()
             eventTypesList?.add(eventTypes)
           }
-          eventsAdapter?.setEventTypeList(eventTypesList!!)
-          Log.i("--name--", eventTypesList?.get(2)?.name!!)
-
-          Log.i("--Listsize--", eventTypesList?.size.toString())
         }
 
+        firestore.collection("events").get()
+          .addOnSuccessListener {
+
+            it.forEach {
+
+              val eventDetails: EventDetails = it.toObject()
+              comedyEvents!!.add(eventDetails)
+            }
+
+            updateUi()
+
+          }.addOnFailureListener {
+            Log.e("--error--", it.printStackTrace().toString())
+          }
+
       }.addOnFailureListener {
-        Log.e("--error--","Failed to load event types")
 
+        Toast.makeText(context, "Please check your internet connection", Toast.LENGTH_SHORT)
+          .show()
       }
-
-    firestore.collection("events").get()
-      .addOnSuccessListener {
-
-        it.forEach {
-          Log.i("data", it.data.toString())
-          Log.i("id", it.id.toString())
-          var eventDetails: EventDetails = it.toObject()
-          eventDetails.type
-        }
-
-      }.addOnFailureListener {
-        Log.e("--error--", it.printStackTrace().toString())
-      }
-
-
   }
+
+  private fun updateUi() {
+    for (event in eventTypesList!!) {
+      event.comedyEventList = comedyEvents!!
+
+    }
+    eventTypesAdapter?.setEventTypeList(eventTypesList!!)
+    Log.i("--etSize--", eventTypesList!!.size.toString())
+  }
+
 }

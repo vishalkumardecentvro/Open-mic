@@ -1,7 +1,10 @@
 package com.myapp.openmic.modalclass
 
 data class EventTypes(
-  var name: String? = null,
-  var image: String? = null,
-  var count: Int = 0
-) {}
+  var name: String,
+  var image: String?,
+  var count: Int = 0,
+  var comedyEventList: ArrayList<EventDetails>
+) {
+  constructor():this("","",0,ArrayList())
+}

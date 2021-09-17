@@ -6,16 +6,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.myapp.openmic.databinding.RvEventBinding
 import com.myapp.openmic.modalclass.EventTypes
 
-class EventsAdapter : RecyclerView.Adapter<EventsAdapter.ViewHolder>() {
-   private var eventTypeList : ArrayList<EventTypes> = ArrayList()
+class EventTypesAdapter : RecyclerView.Adapter<EventTypesAdapter.ViewHolder>() {
+  private var eventTypeList: ArrayList<EventTypes> = ArrayList()
+
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-    val view = RvEventBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+    val view = RvEventBinding.inflate(LayoutInflater.from(parent.context), parent, false)
     return ViewHolder(view)
   }
 
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-    holder.populate(position,eventTypeList)
+    holder.populate(position, eventTypeList)
 
   }
 
@@ -24,20 +25,26 @@ class EventsAdapter : RecyclerView.Adapter<EventsAdapter.ViewHolder>() {
   }
 
   class ViewHolder(binding: RvEventBinding) : RecyclerView.ViewHolder(binding.root) {
-    private val binding : RvEventBinding
+    private val binding: RvEventBinding
+
     init {
       this.binding = binding
 
     }
 
     fun populate(position: Int, eventTypeList: ArrayList<EventTypes>) {
+
       binding.tvEventType.text = eventTypeList.get(position).name
+
+      val eventAdapter = EventAdapter()
+      eventAdapter.setEventList(eventTypeList.get(position).comedyEventList)
+      binding.rvEvents.adapter = eventAdapter
 
     }
 
   }
 
-  fun setEventTypeList(eventType : ArrayList<EventTypes>){
+  fun setEventTypeList(eventType: ArrayList<EventTypes>) {
     this.eventTypeList = eventType
     notifyDataSetChanged()
   }
