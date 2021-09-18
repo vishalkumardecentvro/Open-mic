@@ -4,7 +4,15 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
+  android:padding="5dp"
   tools:context=".fragments.home.AllEventsFragment">
 
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/rvAllEvents"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+    app:reverseLayout="false"
+    tools:listitem="@layout/event_card" />
 
 </FrameLayout>

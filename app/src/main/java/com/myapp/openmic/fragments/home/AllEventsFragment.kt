@@ -1,17 +1,24 @@
 package com.myapp.openmic.fragments.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
+import com.myapp.openmic.adapters.EventAdapter
 import com.myapp.openmic.databinding.FragmentAlleventsBinding
+import com.myapp.openmic.modalclass.Event
 
 class AllEventsFragment : Fragment() {
   private var _binding: FragmentAlleventsBinding? = null
   private val binding get() = _binding!!
   private var eventToDisplay: String? = null
+  private var eventAdapter: EventAdapter? = null
+  private var eventList = ArrayList<Event>()
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -23,6 +30,7 @@ class AllEventsFragment : Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+
     instantiate()
     initialize()
     listen()
@@ -30,14 +38,18 @@ class AllEventsFragment : Fragment() {
   }
 
   private fun instantiate() {
-    val bundle = AllEventsFragment().arguments
+    val bundle: Bundle? = arguments
+
     if (bundle != null && bundle.containsKey("type")) {
       eventToDisplay = bundle.getString("type")
+
     }
 
+    eventAdapter = EventAdapter()
   }
 
   private fun initialize() {
+    binding.rvAllEvents.adapter = eventAdapter
 
   }
 
@@ -50,8 +62,16 @@ class AllEventsFragment : Fragment() {
     firestore.collection("events").whereEqualTo("type", eventToDisplay)
       .get()
       .addOnSuccessListener {
+        if (!it.isEmpty) {
+          it.forEach {
+            val event: Event = it.toObject()
+            eventList.add(event)
+          }
+        }
+        eventAdapter?.setEventList(eventList)
 
       }.addOnFailureListener {
+        Toast.makeText(context,"Please check your internet!",Toast.LENGTH_SHORT).show()
 
       }
 

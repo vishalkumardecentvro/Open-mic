@@ -1,6 +1,7 @@
 package com.myapp.openmic.fragments.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -115,6 +116,7 @@ class HomeFragment : Fragment(), EventTypesAdapter.OnEventCardClickInterface {
   override fun onMoreClick(position: Int) {
     val bundle: Bundle = Bundle()
     bundle.putString("type", eventTypesList?.get(position)?.name)
+    Log.i("--event--",eventTypesList?.get(position)?.name.toString())
 
     val allEventsFragment = AllEventsFragment()
     allEventsFragment.arguments = bundle
@@ -122,7 +124,7 @@ class HomeFragment : Fragment(), EventTypesAdapter.OnEventCardClickInterface {
     val fragmentManager: FragmentManager = (context as FragmentActivity).supportFragmentManager
     val fragmentTransaction = fragmentManager.beginTransaction()
     fragmentTransaction.replace(R.id.fragmentContainer, allEventsFragment)
-    fragmentTransaction.addToBackStack("all events")
+    //fragmentTransaction.addToBackStack("all events")
     fragmentTransaction.commit()
   }
 
