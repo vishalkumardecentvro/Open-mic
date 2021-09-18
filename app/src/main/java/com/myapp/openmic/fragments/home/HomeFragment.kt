@@ -1,21 +1,23 @@
 package com.myapp.openmic.fragments.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
+import com.myapp.openmic.R
 import com.myapp.openmic.adapters.EventAdapter
 import com.myapp.openmic.adapters.EventTypesAdapter
 import com.myapp.openmic.databinding.FragmentHomeBinding
 import com.myapp.openmic.modalclass.Event
 import com.myapp.openmic.modalclass.EventTypes
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), EventTypesAdapter.OnEventCardClickInterface {
   private var _binding: FragmentHomeBinding? = null
   private val binding get() = _binding!!
   private lateinit var firestore: FirebaseFirestore
@@ -39,10 +41,7 @@ class HomeFragment : Fragment() {
     instantiate()
     initialize()
     listen()
-
     load()
-
-
   }
 
   private fun instantiate() {
@@ -61,6 +60,7 @@ class HomeFragment : Fragment() {
   }
 
   private fun listen() {
+    eventTypesAdapter?.setEventClick(this)
 
   }
 
@@ -74,7 +74,7 @@ class HomeFragment : Fragment() {
           it.forEach {
             val eventTypes: EventTypes = it.toObject()
 
-            firestore.collection("events").whereEqualTo("type", eventTypes.name).get()
+            firestore.collection("top-10-events").whereEqualTo("type", eventTypes.name).get()
               .addOnSuccessListener {
 
                 it.forEach {
@@ -109,10 +109,21 @@ class HomeFragment : Fragment() {
   }
 
   private fun updateUi() {
-
     eventTypesAdapter?.setEventTypeList(eventTypesList!!)
-    Log.i("--etSize--", eventTypesList!!.size.toString())
+  }
 
+  override fun onMoreClick(position: Int) {
+    val bundle: Bundle = Bundle()
+    bundle.putString("type", eventTypesList?.get(position)?.name)
+
+    val allEventsFragment = AllEventsFragment()
+    allEventsFragment.arguments = bundle
+
+    val fragmentManager: FragmentManager = (context as FragmentActivity).supportFragmentManager
+    val fragmentTransaction = fragmentManager.beginTransaction()
+    fragmentTransaction.replace(R.id.fragmentContainer, allEventsFragment)
+    fragmentTransaction.addToBackStack("all events")
+    fragmentTransaction.commit()
   }
 
 }

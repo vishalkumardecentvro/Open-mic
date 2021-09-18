@@ -248,7 +248,7 @@ class AdminFragment : Fragment() {
     event.put("hostedBy", hostList)
     event.put("performedBy", performerList)
 
-    firestore.collection("events").add(event)
+    firestore.collection("top-10-events").add(event)
       .addOnSuccessListener {
         Toast.makeText(context, "Event saved", Toast.LENGTH_SHORT).show()
         saveEventImage(it.id)
@@ -304,7 +304,7 @@ class AdminFragment : Fragment() {
     val eventImageHash = HashMap<String, Any>()
     eventImageHash.put("eventImageUrl", imageUrl)
 
-    firestore.collection("events").document(id)
+    firestore.collection("top-10-events").document(id)
       .update(eventImageHash)
 
       .addOnSuccessListener {

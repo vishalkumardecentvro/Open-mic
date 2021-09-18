@@ -33,7 +33,9 @@ class EventAdapter : RecyclerView.Adapter<EventAdapter.ViewHolder>() {
 
     fun populate(position: Int, eventList: ArrayList<Event>) {
       binding.tvEventDescription.text = eventList.get(position).shortDescription
-      Picasso.get().load(eventList.get(position).eventImageUrl).fit().into(binding.ivEventImage)
+      Picasso.get().load(eventList.get(position).eventImageUrl)
+        .fit()
+        .into(binding.ivEventImage)
     }
 
   }

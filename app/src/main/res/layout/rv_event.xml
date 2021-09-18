@@ -14,13 +14,40 @@
     android:text="Preview"
     android:textSize="18sp" />
 
-  <androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/rvEvents"
+  <FrameLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="5dp"
-    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-    tools:listitem="@layout/event_card" />
+    android:layout_height="wrap_content">
+
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/rvEvents"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:padding="5dp"
+      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+      tools:listitem="@layout/event_card" />
+
+    <com.google.android.material.card.MaterialCardView
+      android:id="@+id/mcvAllEvents"
+      style="@style/default_card_style"
+      android:layout_width="50dp"
+      android:layout_height="50dp"
+      android:layout_gravity="end|center_vertical"
+      android:layout_margin="10dp"
+      app:cardElevation="15dp"
+      app:cardBackgroundColor="@color/brand_color_light"
+      app:cardCornerRadius="50dp">
+
+      <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_double_arrow"
+        app:tint="@color/white" />
+    </com.google.android.material.card.MaterialCardView>
+
+
+  </FrameLayout>
+
 
 </LinearLayout>
