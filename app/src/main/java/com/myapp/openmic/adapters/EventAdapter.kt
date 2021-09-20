@@ -53,10 +53,6 @@ class EventAdapter(private var onEventClick: OnEventCardClick) : RecyclerView.Ad
     notifyDataSetChanged()
   }
 
-  fun setOnEventClick(onEventClick: OnEventCardClick) {
-    this.onEventClick = onEventClick
-  }
-
   interface OnEventCardClick {
     fun showFullInformation(position: Int)
   }

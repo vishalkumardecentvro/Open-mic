@@ -19,7 +19,7 @@ import com.myapp.openmic.databinding.FragmentHomeBinding
 import com.myapp.openmic.modalclass.Event
 import com.myapp.openmic.modalclass.EventTypes
 
-class HomeFragment : Fragment(), EventTypesAdapter.OnClickingMore, EventAdapter.OnEventCardClick {
+class HomeFragment : Fragment(), EventTypesAdapter.OnClickingMore {
   private var _binding: FragmentHomeBinding? = null
   private val binding get() = _binding!!
   private lateinit var firestore: FirebaseFirestore
@@ -115,16 +115,11 @@ class HomeFragment : Fragment(), EventTypesAdapter.OnClickingMore, EventAdapter.
   override fun onMoreClick(position: Int) {
     val bundle = Bundle()
     bundle.putString("type", eventTypesList?.get(position)?.name)
-    Log.i("--event--",eventTypesList?.get(position)?.name.toString())
 
     val allEventsFragment = AllEventsFragment()
     allEventsFragment.arguments = bundle
 
     Utils.navigate(requireContext(),allEventsFragment,"all events")
-  }
-
-  override fun showFullInformation(position: Int) {
-    TODO("Not yet implemented")
   }
 
 }

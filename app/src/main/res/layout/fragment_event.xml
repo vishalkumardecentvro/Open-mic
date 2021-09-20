@@ -68,6 +68,7 @@
     android:layout_below="@id/tvLocation"
     android:padding="5dp"
     android:text="Description"
+    android:id="@+id/tvDescription"
     android:textSize="17sp"
     android:textStyle="normal" />
 

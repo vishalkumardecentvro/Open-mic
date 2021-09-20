@@ -1,15 +1,14 @@
 package com.myapp.openmic.fragments.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
-import com.myapp.openmic.R
 import com.myapp.openmic.Utils
 import com.myapp.openmic.adapters.EventAdapter
 import com.myapp.openmic.databinding.FragmentAlleventsBinding
@@ -68,6 +67,7 @@ class AllEventsFragment : Fragment(), EventAdapter.OnEventCardClick {
         if (!it.isEmpty) {
           it.forEach {
             val event: Event = it.toObject()
+            event.docId = it.id
             eventList.add(event)
           }
         }
@@ -80,6 +80,10 @@ class AllEventsFragment : Fragment(), EventAdapter.OnEventCardClick {
   }
 
   override fun showFullInformation(position: Int) {
-    Utils.navigate(requireContext(),EventFragment(),"event")
+    val bundle = Bundle()
+    bundle.putString("id", eventList.get(position).docId)
+    val eventsFragment = EventFragment()
+    eventsFragment.arguments = bundle
+    Utils.navigate(requireContext(), eventsFragment, "event")
   }
 }
