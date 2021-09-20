@@ -12,21 +12,20 @@ import androidx.fragment.app.FragmentManager
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
 import com.myapp.openmic.R
+import com.myapp.openmic.Utils
 import com.myapp.openmic.adapters.EventAdapter
 import com.myapp.openmic.adapters.EventTypesAdapter
 import com.myapp.openmic.databinding.FragmentHomeBinding
 import com.myapp.openmic.modalclass.Event
 import com.myapp.openmic.modalclass.EventTypes
 
-class HomeFragment : Fragment(), EventTypesAdapter.OnEventCardClickInterface {
+class HomeFragment : Fragment(), EventTypesAdapter.OnClickingMore, EventAdapter.OnEventCardClick {
   private var _binding: FragmentHomeBinding? = null
   private val binding get() = _binding!!
   private lateinit var firestore: FirebaseFirestore
   private var eventTypesList: ArrayList<EventTypes>? = null;
   private var allEventList: ArrayList<Event>? = null;
   private var eventTypesAdapter: EventTypesAdapter? = null;
-  private var eventAdapter: EventAdapter? = null
-
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -51,9 +50,7 @@ class HomeFragment : Fragment(), EventTypesAdapter.OnEventCardClickInterface {
     eventTypesList = arrayListOf()
     allEventList = arrayListOf()
 
-    eventTypesAdapter = EventTypesAdapter()
-    eventAdapter = EventAdapter()
-
+    eventTypesAdapter = EventTypesAdapter(requireContext())
   }
 
   private fun initialize() {
@@ -75,7 +72,9 @@ class HomeFragment : Fragment(), EventTypesAdapter.OnEventCardClickInterface {
           it.forEach {
             val eventTypes: EventTypes = it.toObject()
 
-            firestore.collection("top-10-events").whereEqualTo("type", eventTypes.name).get()
+            firestore.collection("top-10-events")
+              .whereEqualTo("type", eventTypes.name)
+              .get()
               .addOnSuccessListener {
 
                 it.forEach {
@@ -114,18 +113,18 @@ class HomeFragment : Fragment(), EventTypesAdapter.OnEventCardClickInterface {
   }
 
   override fun onMoreClick(position: Int) {
-    val bundle: Bundle = Bundle()
+    val bundle = Bundle()
     bundle.putString("type", eventTypesList?.get(position)?.name)
     Log.i("--event--",eventTypesList?.get(position)?.name.toString())
 
     val allEventsFragment = AllEventsFragment()
     allEventsFragment.arguments = bundle
 
-    val fragmentManager: FragmentManager = (context as FragmentActivity).supportFragmentManager
-    val fragmentTransaction = fragmentManager.beginTransaction()
-    fragmentTransaction.replace(R.id.fragmentContainer, allEventsFragment)
-    //fragmentTransaction.addToBackStack("all events")
-    fragmentTransaction.commit()
+    Utils.navigate(requireContext(),allEventsFragment,"all events")
+  }
+
+  override fun showFullInformation(position: Int) {
+    TODO("Not yet implemented")
   }
 
 }

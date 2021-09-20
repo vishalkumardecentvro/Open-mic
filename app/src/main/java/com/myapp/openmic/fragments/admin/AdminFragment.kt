@@ -262,7 +262,7 @@ class AdminFragment : Fragment() {
     galleryIntent.type = "image/*"
     startActivityForResult(
       Intent.createChooser(galleryIntent, "Select picture"),
-      Utils().PICK_IMAGE
+      Utils.PICK_IMAGE
     )
   }
 
@@ -271,7 +271,7 @@ class AdminFragment : Fragment() {
 
     Toast.makeText(context, "Image selected", Toast.LENGTH_SHORT).show()
 
-    if (requestCode == Utils().PICK_IMAGE && resultCode == RESULT_OK) {
+    if (requestCode == Utils.PICK_IMAGE && resultCode == RESULT_OK) {
       val image = data?.data
       path = data?.data!!
 

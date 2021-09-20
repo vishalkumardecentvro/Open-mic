@@ -9,7 +9,9 @@
         <entry key="app/src/main/res/layout/chip_layout.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/event_card.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/fragment_admin.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/fragment_allevents.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/fragment_comedy.xml" value="0.35025641025641024" />
+        <entry key="app/src/main/res/layout/fragment_event.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/rv_event.xml" value="0.35025641025641024" />
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.35572916666666665" />

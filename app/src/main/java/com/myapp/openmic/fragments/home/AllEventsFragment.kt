@@ -1,19 +1,21 @@
 package com.myapp.openmic.fragments.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
+import com.myapp.openmic.R
+import com.myapp.openmic.Utils
 import com.myapp.openmic.adapters.EventAdapter
 import com.myapp.openmic.databinding.FragmentAlleventsBinding
 import com.myapp.openmic.modalclass.Event
 
-class AllEventsFragment : Fragment() {
+class AllEventsFragment : Fragment(), EventAdapter.OnEventCardClick {
   private var _binding: FragmentAlleventsBinding? = null
   private val binding get() = _binding!!
   private var eventToDisplay: String? = null
@@ -45,7 +47,7 @@ class AllEventsFragment : Fragment() {
 
     }
 
-    eventAdapter = EventAdapter()
+    eventAdapter = EventAdapter(this)
   }
 
   private fun initialize() {
@@ -59,6 +61,7 @@ class AllEventsFragment : Fragment() {
 
   private fun load() {
     val firestore = FirebaseFirestore.getInstance()
+
     firestore.collection("events").whereEqualTo("type", eventToDisplay)
       .get()
       .addOnSuccessListener {
@@ -71,9 +74,12 @@ class AllEventsFragment : Fragment() {
         eventAdapter?.setEventList(eventList)
 
       }.addOnFailureListener {
-        Toast.makeText(context,"Please check your internet!",Toast.LENGTH_SHORT).show()
 
+        Toast.makeText(context, "Please check your internet!", Toast.LENGTH_SHORT).show()
       }
+  }
 
+  override fun showFullInformation(position: Int) {
+    Utils.navigate(requireContext(),EventFragment(),"event")
   }
 }
