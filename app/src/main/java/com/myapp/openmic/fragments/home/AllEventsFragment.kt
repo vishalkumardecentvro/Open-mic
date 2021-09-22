@@ -1,7 +1,6 @@
 package com.myapp.openmic.fragments.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -81,9 +80,10 @@ class AllEventsFragment : Fragment(), EventAdapter.OnEventCardClick {
 
   override fun showFullInformation(position: Int) {
     val bundle = Bundle()
-    bundle.putString("id", eventList.get(position).docId)
+    bundle.putSerializable("event", eventList.get(position))
     val eventsFragment = EventFragment()
     eventsFragment.arguments = bundle
+
     Utils.navigate(requireContext(), eventsFragment, "event")
   }
 }

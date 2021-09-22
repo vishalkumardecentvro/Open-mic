@@ -7,7 +7,8 @@ import com.myapp.openmic.databinding.EventCardBinding
 import com.myapp.openmic.modalclass.Event
 import com.squareup.picasso.Picasso
 
-class EventAdapter(private var onEventClick: OnEventCardClick) : RecyclerView.Adapter<EventAdapter.ViewHolder>() {
+class EventAdapter(private var onEventClick: OnEventCardClick) :
+  RecyclerView.Adapter<EventAdapter.ViewHolder>() {
   private var eventList: ArrayList<Event> = ArrayList()
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -40,12 +41,13 @@ class EventAdapter(private var onEventClick: OnEventCardClick) : RecyclerView.Ad
     }
 
     fun populate(position: Int, eventList: ArrayList<Event>) {
-      binding.tvEventDescription.text = eventList[position].shortDescription
+      binding.tvDescription.text = eventList[position].shortDescription
+      binding.tvName.text = eventList[position].eventName
+
       Picasso.get().load(eventList.get(position).eventImageUrl)
         .fit()
         .into(binding.ivEventImage)
     }
-
   }
 
   fun setEventList(event: ArrayList<Event>) {

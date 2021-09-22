@@ -19,12 +19,21 @@
       android:src="@drawable/vipul_goyal" />
 
     <TextView
-      android:id="@+id/tvEventDescription"
+      android:id="@+id/tvName"
       style="@style/default_text_view_style"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:text="Event name"
+      android:textSize="13sp" />
+
+    <TextView
+      android:id="@+id/tvDescription"
+      style="@style/default_text_view_style"
+      android:layout_width="match_parent"
+      android:textStyle="normal"
+      android:layout_height="wrap_content"
       android:text="Description text Description textDescription text"
-      android:textSize="14dp" />
+      android:textSize="12sp" />
   </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

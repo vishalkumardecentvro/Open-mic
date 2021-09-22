@@ -1,5 +1,7 @@
 package com.myapp.openmic.modalclass
 
+import java.io.Serializable
+
 data class Event(
   val eventName: String,
   val type : String,
@@ -11,12 +13,13 @@ data class Event(
   val ageCriteria: String,
   val hostedBy: ArrayList<String>,
   val performedBy: ArrayList<String>,
-  val eventImageUrl: String,
+  var eventImageUrl: String,
   var docId : String
-) {
+) : Serializable  {
   // firebase needs empty constructor
   constructor() : this(
     "", "","", "",
     "", "", "", "", ArrayList<String>(), ArrayList<String>(), "",""
   )
+
 }
