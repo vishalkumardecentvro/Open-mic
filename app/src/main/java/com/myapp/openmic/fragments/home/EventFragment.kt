@@ -5,13 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.myapp.openmic.Utils
 import com.myapp.openmic.databinding.FragmentEventBinding
 import com.myapp.openmic.modalclass.Event
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_event.*
 
 class EventFragment : Fragment() {
   private var _binding: FragmentEventBinding? = null;
   private val binding get() = _binding!!
+  private var eventInfo: Event = Event()
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +38,7 @@ class EventFragment : Fragment() {
     val bundle: Bundle? = arguments
     if (bundle != null && bundle.containsKey("event")) {
 
-      val eventInfo: Event = bundle.getSerializable("event") as Event
+      eventInfo = bundle.getSerializable("event") as Event
       populate(eventInfo)
     }
 
@@ -46,6 +49,15 @@ class EventFragment : Fragment() {
   }
 
   private fun listen() {
+    val bookTicketFragment: BookTicketFragment = BookTicketFragment()
+    val bundle = Bundle()
+    bundle.putInt("totalSeats", eventInfo.numberOfSeat)
+    bundle.putInt("price", eventInfo.price)
+    bundle.putString("eventName", eventInfo.eventName)
+    bookTicketFragment.arguments = bundle
+    bookTicketButton.setOnClickListener {
+      Utils.navigate(requireContext(), BookTicketFragment(), "book ticket")
+    }
 
   }
 
@@ -61,4 +73,5 @@ class EventFragment : Fragment() {
     binding.tvDescription.text = event.longDescription
     Picasso.get().load(event.eventImageUrl).fit().into(binding.ivEventBanner)
   }
+
 }

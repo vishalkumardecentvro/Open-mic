@@ -9,15 +9,15 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
 import com.myapp.openmic.Utils
-import com.myapp.openmic.adapters.EventAdapter
+import com.myapp.openmic.adapters.EventsAdapter
 import com.myapp.openmic.databinding.FragmentAlleventsBinding
 import com.myapp.openmic.modalclass.Event
 
-class AllEventsFragment : Fragment(), EventAdapter.OnEventCardClick {
+class AllEventsFragment : Fragment(), EventsAdapter.OnEventCardClick {
   private var _binding: FragmentAlleventsBinding? = null
   private val binding get() = _binding!!
   private var eventToDisplay: String? = null
-  private var eventAdapter: EventAdapter? = null
+  private var eventsAdapter: EventsAdapter = EventsAdapter()
   private var eventList = ArrayList<Event>()
 
   override fun onCreateView(
@@ -44,13 +44,11 @@ class AllEventsFragment : Fragment(), EventAdapter.OnEventCardClick {
       eventToDisplay = bundle.getString("type")
 
     }
-
-    eventAdapter = EventAdapter(this)
   }
 
   private fun initialize() {
-    binding.rvAllEvents.adapter = eventAdapter
-
+    binding.rvAllEvents.adapter = eventsAdapter
+    eventsAdapter.setOnEventCardClick(this)
   }
 
   private fun listen() {
@@ -70,7 +68,7 @@ class AllEventsFragment : Fragment(), EventAdapter.OnEventCardClick {
             eventList.add(event)
           }
         }
-        eventAdapter?.setEventList(eventList)
+        eventsAdapter.setEventList(eventList)
 
       }.addOnFailureListener {
 

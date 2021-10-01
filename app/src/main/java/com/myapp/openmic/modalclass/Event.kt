@@ -14,12 +14,15 @@ data class Event(
   val hostedBy: ArrayList<String>,
   val performedBy: ArrayList<String>,
   var eventImageUrl: String,
-  var docId : String
+  var docId : String,
+  var price : Int,
+  var numberOfSeat : Int
 ) : Serializable  {
   // firebase needs empty constructor
   constructor() : this(
     "", "","", "",
-    "", "", "", "", ArrayList<String>(), ArrayList<String>(), "",""
+    "", "", "", "", ArrayList<String>(), ArrayList<String>(), "","",
+    0,0
   )
 
 }

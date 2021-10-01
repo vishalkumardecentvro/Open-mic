@@ -21,8 +21,22 @@ class Utils {
       fragmentTransaction.commit()
     }
 
+    fun navigateAndSaveState(
+      context: Context,
+      hideFragment: Fragment,
+      showFragment: Fragment,
+      name: String
+    ) {
+
+      val fragmentManager = (context as FragmentActivity).supportFragmentManager
+      val fragmentTransaction = fragmentManager.beginTransaction()
+      fragmentTransaction.hide(hideFragment).show(showFragment)
+      fragmentTransaction.addToBackStack(name)
+      fragmentTransaction.commit()
+    }
+
     fun toast(context: Context, text: String, toastLength: Int) {
-      if (toastLength.equals(2))
+      if (toastLength == 2)
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
       else
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show()

@@ -1,13 +1,10 @@
 package com.myapp.openmic.adapters
 
 import android.content.Context
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.myapp.openmic.Utils
 import com.myapp.openmic.databinding.RvEventBinding
-import com.myapp.openmic.fragments.home.EventFragment
 import com.myapp.openmic.modalclass.EventTypes
 
 class EventTypesAdapter(var context: Context) : RecyclerView.Adapter<EventTypesAdapter.ViewHolder>() {
@@ -30,7 +27,7 @@ class EventTypesAdapter(var context: Context) : RecyclerView.Adapter<EventTypesA
   }
 
   inner class ViewHolder(private val binding: RvEventBinding, listener: OnClickingMore) :
-    RecyclerView.ViewHolder(binding.root), EventAdapter.OnEventCardClick {
+    RecyclerView.ViewHolder(binding.root),EventsAdapter.OnEventCardClick {
 
     init {
       binding.mcvAllEvents.setOnClickListener {
@@ -44,18 +41,16 @@ class EventTypesAdapter(var context: Context) : RecyclerView.Adapter<EventTypesA
 
     fun populate(position: Int, eventTypeList: ArrayList<EventTypes>) {
 
-      binding.tvEventType.text = eventTypeList.get(position).name
+      binding.tvEventType.text = eventTypeList[position].name
 
-      val eventAdapter = EventAdapter(this)
-      eventAdapter.setEventList(eventTypeList.get(position).eventList)
+      val eventAdapter = EventsAdapter()
+      eventAdapter.setOnEventCardClick(this)
+      eventAdapter.setEventList(eventTypeList[position].eventList)
       binding.rvEvents.adapter = eventAdapter
-
     }
 
     override fun showFullInformation(position: Int) {
-      val bundle = Bundle()
-      //bundle.putString(eventTypeList.get(position).eventList.get(position).)
-      Utils.navigate(context,EventFragment(),"event")
+
     }
   }
 

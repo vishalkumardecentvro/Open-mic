@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.myapp.openmic.fragments.admin.AdminFragment
 import com.myapp.openmic.fragments.home.HomeFragment
+import com.myapp.openmic.fragments.videos.VideosFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -47,6 +48,10 @@ class MainActivity : AppCompatActivity() {
         }
         R.id.home -> {
           fragmentManager.beginTransaction().replace(R.id.fragmentContainer, homeFragment).commit()
+          true
+        }
+        R.id.videos->{
+          fragmentManager.beginTransaction().replace(R.id.fragmentContainer, VideosFragment()).commit()
           true
         }
         else -> false

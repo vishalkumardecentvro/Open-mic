@@ -11,7 +11,7 @@
     style="@style/default_text_view_style"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Preview"
+    android:text="Name preview"
     android:textSize="18sp" />
 
   <FrameLayout

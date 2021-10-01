@@ -7,13 +7,14 @@ import com.myapp.openmic.databinding.EventCardBinding
 import com.myapp.openmic.modalclass.Event
 import com.squareup.picasso.Picasso
 
-class EventAdapter(private var onEventClick: OnEventCardClick) :
-  RecyclerView.Adapter<EventAdapter.ViewHolder>() {
+class EventsAdapter :
+  RecyclerView.Adapter<EventsAdapter.ViewHolder>() {
   private var eventList: ArrayList<Event> = ArrayList()
+  private var onEventClick : OnEventCardClick? = null
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
     val view = EventCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-    return ViewHolder(view, onEventClick)
+    return ViewHolder(view, onEventClick!!)
   }
 
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -53,6 +54,10 @@ class EventAdapter(private var onEventClick: OnEventCardClick) :
   fun setEventList(event: ArrayList<Event>) {
     this.eventList = event
     notifyDataSetChanged()
+  }
+
+  fun setOnEventCardClick(onEventClick: OnEventCardClick){
+    this.onEventClick = onEventClick
   }
 
   interface OnEventCardClick {

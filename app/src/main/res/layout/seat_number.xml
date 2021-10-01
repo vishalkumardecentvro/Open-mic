@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content">
+
+  <com.google.android.material.card.MaterialCardView
+    android:layout_width="45dp"
+    android:layout_height="60dp"
+    android:layout_margin="5dp"
+    app:cardElevation="5dp"
+    app:strokeColor="@color/brand_color_light"
+    app:strokeWidth="1dp">
+
+    <TextView
+      style="@style/default_text_view_style"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:id="@+id/tvSeat"
+      android:text="1"
+      android:textSize="20sp"
+      android:gravity="center"
+      android:textStyle="normal" />
+  </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>
