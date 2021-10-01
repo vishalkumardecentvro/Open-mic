@@ -14,7 +14,7 @@ class BookTicketFragment : Fragment() {
   private val binding get() = _binding!!
   private var price: Int = 0
   private var numberOfSeats: Int = 0
-  private val seatAdapter : SeatAdapter = SeatAdapter()
+  private var seatAdapter : SeatAdapter? = null
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -45,6 +45,8 @@ class BookTicketFragment : Fragment() {
       numberOfSeats = bundle.getInt("totalSeats")
     }
 
+    seatAdapter = SeatAdapter(requireContext())
+
   }
 
   private fun initialize() {
@@ -59,10 +61,10 @@ class BookTicketFragment : Fragment() {
 
   private fun load() {
     val seat : ArrayList<String> = ArrayList()
-    for(i in 1..11){
+    for(i in 1..10){
       seat.add(i.toString())
     }
-    seatAdapter.seatList = seat
+    seatAdapter?.seatList = seat
 
   }
 }
