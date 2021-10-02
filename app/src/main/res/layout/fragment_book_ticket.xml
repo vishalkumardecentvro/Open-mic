@@ -1,138 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:orientation="vertical"
   android:padding="10dp"
   tools:context=".fragments.home.BookTicketFragment">
 
-  <LinearLayout
+  <ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:orientation="vertical"
+      android:layout_height="wrap_content">
+
+      <TextView
+        android:id="@+id/tvSeatsLabel"
+        style="@style/default_text_view_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="Select number of seats" />
+
+      <ImageView
+        android:id="@+id/ivSeat"
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:layout_below="@id/tvSeatsLabel"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/seat" />
+
+      <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSeat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ivSeat"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:reverseLayout="false"
+        tools:listitem="@layout/seat_number" />
+
+      <TextView
+        android:id="@+id/tvDateLabel"
+        style="@style/default_text_view_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="Select date" />
+
+      <Spinner
+        android:id="@+id/dateSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp" />
+
+      <TextView
+        android:id="@+id/tvTimeLabel"
+        style="@style/default_text_view_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="Select time" />
+
+      <Spinner
+        android:id="@+id/timeSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp" />
+
+    </LinearLayout>
+
+  </ScrollView>
+
+  <Button
+    android:id="@+id/paymentButton"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_alignParentBottom="true"
+    android:text="Make payment" />
 
-    <TextView
-      android:id="@+id/tvSeatsLabel"
-      style="@style/default_text_view_style"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginBottom="10dp"
-      android:text="Select number of seats" />
-
-    <ImageView
-      android:layout_width="match_parent"
-      android:layout_height="125dp"
-      android:layout_marginBottom="10dp"
-      android:src="@drawable/seat" />
-
-    <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/rvSeat"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginBottom="10dp"
-      android:orientation="horizontal"
-      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-      app:reverseLayout="false"
-      tools:listitem="@layout/seat_number" />
-
-    <TextView
-      style="@style/default_text_view_style"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginBottom="10dp"
-      android:text="Select date" />
-
-    <Spinner
-      android:id="@+id/dateSpinner"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginBottom="10dp" />
-
-    <TextView
-      style="@style/default_text_view_style"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginBottom="10dp"
-      android:text="Select time" />
-
-    <Spinner
-      android:id="@+id/timeSpinner"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginBottom="10dp" />
-
-    <com.google.android.material.card.MaterialCardView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      app:cardElevation="5dp"
-      android:layout_marginBottom="10dp"
-      app:strokeColor="@color/brand_color_light"
-      app:strokeWidth="1dp">
-
-      <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-          style="@style/default_text_view_style"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginBottom="10dp"
-          android:gravity="center"
-          android:text="Summary" />
-
-        <TextView
-          android:id="@+id/tvNameSummary"
-          style="@style/default_text_view_style"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginBottom="10dp"
-          android:text="Name" />
-
-        <TextView
-          android:id="@+id/tvDateSummary"
-          style="@style/default_text_view_style"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginBottom="10dp"
-          android:text="Date" />
-
-        <TextView
-          android:id="@+id/tvTimeSummary"
-          style="@style/default_text_view_style"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginBottom="10dp"
-          android:text="Time" />
-
-        <TextView
-          android:id="@+id/tvCostSummary"
-          style="@style/default_text_view_style"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginBottom="10dp"
-          android:text="Cost" />
-
-        <TextView
-          android:id="@+id/tvSeatsSummary"
-          style="@style/default_text_view_style"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginBottom="10dp"
-          android:text="Seat" />
-      </LinearLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <Button
-      android:id="@+id/paymentButton"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="Make payment" />
-
-  </LinearLayout>
-
-</ScrollView>
+</RelativeLayout>

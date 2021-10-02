@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:padding="10dp"
+  tools:context=".fragments.PaymentFragment">
+
+  <com.google.android.material.card.MaterialCardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    app:cardElevation="5dp"
+    app:strokeColor="@color/brand_color_light"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical">
+
+      <TextView
+        style="@style/default_text_view_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:text="Order summary" />
+
+      <TextView
+        android:id="@+id/tvNameSummary"
+        style="@style/default_text_view_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="Name" />
+
+      <TextView
+        android:id="@+id/tvDateSummary"
+        style="@style/default_text_view_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="Date" />
+
+      <TextView
+        android:id="@+id/tvTimeSummary"
+        style="@style/default_text_view_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="Time" />
+
+      <TextView
+        android:id="@+id/tvSeatsSummary"
+        style="@style/default_text_view_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="Seat" />
+
+      <TextView
+        android:id="@+id/tvCostSummary"
+        style="@style/default_text_view_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="Cost" />
+    </LinearLayout>
+  </com.google.android.material.card.MaterialCardView>
+
+
+</FrameLayout>

@@ -1,6 +1,7 @@
 package com.myapp.openmic.fragments.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,12 +52,18 @@ class EventFragment : Fragment() {
   private fun listen() {
     val bookTicketFragment: BookTicketFragment = BookTicketFragment()
     val bundle = Bundle()
-    bundle.putInt("totalSeats", eventInfo.numberOfSeat)
+
+    bundle.putInt("totalSeats", eventInfo.totalSeats)
     bundle.putInt("price", eventInfo.price)
     bundle.putString("eventName", eventInfo.eventName)
+    bundle.putInt("bookedSeats", eventInfo.bookedSeats)
+    bundle.putStringArrayList("dateList", eventInfo.date)
+    bundle.putStringArrayList("timeList", eventInfo.time)
+
     bookTicketFragment.arguments = bundle
+
     bookTicketButton.setOnClickListener {
-      Utils.navigate(requireContext(), BookTicketFragment(), "book ticket")
+      Utils.navigate(requireContext(), bookTicketFragment, "book ticket")
     }
 
   }
@@ -67,8 +74,9 @@ class EventFragment : Fragment() {
 
   fun populate(event: Event) {
     binding.tvEventName.text = event.eventName
-    binding.tvDate.text = event.date
-    binding.tvTime.text = event.time
+    //binding.tvDate.text = event.date
+    //binding.tvTime.text = event.time
+    binding.tvPrice.text = event.price.toString()
     binding.tvLocation.text = event.eventLocation
     binding.tvDescription.text = event.longDescription
     Picasso.get().load(event.eventImageUrl).fit().into(binding.ivEventBanner)
