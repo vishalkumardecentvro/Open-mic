@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
+  android:orientation="vertical"
   android:padding="10dp"
   tools:context=".fragments.PaymentFragment">
 
@@ -70,5 +71,38 @@
     </LinearLayout>
   </com.google.android.material.card.MaterialCardView>
 
+  <TextView
+    style="@style/default_text_view_style"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:text="Pay with"
+    android:textSize="18sp" />
 
-</FrameLayout>
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <ImageView
+      android:layout_width="match_parent"
+      android:layout_height="100dp"
+      android:layout_margin="5dp"
+      android:layout_weight="1"
+      android:src="@drawable/razorpay" />
+
+    <View
+      android:layout_width="1dp"
+      android:layout_height="match_parent"
+      android:layout_margin="2dp"
+      android:background="@color/brand_color_light" />
+
+    <ImageView
+      android:layout_width="match_parent"
+      android:layout_height="100dp"
+      android:layout_margin="5dp"
+      android:layout_weight="1"
+      android:src="@drawable/googlepay" />
+  </LinearLayout>
+
+</LinearLayout>

@@ -1,7 +1,6 @@
 package com.myapp.openmic.fragments.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -76,7 +75,7 @@ class EventFragment : Fragment() {
     binding.tvEventName.text = event.eventName
     //binding.tvDate.text = event.date
     //binding.tvTime.text = event.time
-    binding.tvPrice.text = event.price.toString()
+    binding.tvPrice.text = "₹ "+event.price.toString()
     binding.tvLocation.text = event.eventLocation
     binding.tvDescription.text = event.longDescription
     Picasso.get().load(event.eventImageUrl).fit().into(binding.ivEventBanner)
